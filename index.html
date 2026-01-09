@@ -6,50 +6,47 @@
     <title>PROJECT: MIDNIGHT</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="vhs-overlay"></div>
-    <div class="scanlines"></div>
+<body class="layout-1" id="main-body"> <div class="tv-static"></div>
+    <div class="vignette"></div>
 
-    <div id="main-menu" class="menu-wrapper">
-        <header>
-            <p class="system-text">TERMINAL V.99.12 - USER: ALISTER THORNE</p>
-            <h1 class="main-title">PROJECT<br><span class="glitch">MIDNIGHT</span></h1>
-        </header>
-
-        <nav class="menu-options">
-            <button class="menu-btn" onclick="startGame()">[ NEW ENTRY ]</button>
-            <button class="menu-btn" onclick="continueGame()">[ RESUME ]</button>
-            <button class="menu-btn" onclick="toggleSettings(true)">[ SETTINGS ]</button>
-        </nav>
-
-        <footer class="menu-footer">
-            <p>FACILITY: STORAGE UNIT-06 | STATUS: Y2K READY</p>
-            <p class="copyright">© 1999 FAZBEAR ENT. SUBSIDIARY.</p>
-        </footer>
+    <div id="notification-gui" class="gui-popup">
+        <p id="gui-msg">SYSTEM READY</p>
     </div>
 
-    <div id="settings-menu" class="settings-overlay">
-        <div class="settings-content">
-            <h2 class="settings-title">SYSTEM CONFIGURATION</h2>
-            
-            <div class="setting-item">
-                <label>AUDIO VOLUME</label>
-                <input type="range" min="0" max="100" value="80">
-            </div>
+    <main id="main-menu">
+        <div class="branding">
+            <h1 class="title">PROJECT: MIDNIGHT</h1>
+            <p class="subtitle">Storage Facility Management System v1.0</p>
+        </div>
 
-            <div class="setting-item">
-                <label>VISUAL STATIC</label>
-                <input type="checkbox" checked>
-            </div>
+        <nav class="nav-buttons">
+            <button class="btn" onclick="startGame()">NEW ENTRY</button>
+            <button class="btn" onclick="showMsg('NO SAVE DATA FOUND')">RESUME</button>
+            <button class="btn" onclick="toggleSettings(true)">SETTINGS</button>
+        </nav>
+    </main>
 
-            <div class="setting-item">
-                <label>DIFFICULTY</label>
-                <span class="status-green">NORMAL</span>
+    <div id="settings-menu" class="modal">
+        <div class="modal-content">
+            <h3>TERMINAL CONFIG</h3>
+            <div class="setting-row">
+                <label>INTERFACE STYLE</label>
+                <select onchange="changeLayout(this.value)">
+                    <option value="layout-1">Classic Center</option>
+                    <option value="layout-2">Left Terminal</option>
+                    <option value="layout-3">Minimalist Top</option>
+                </select>
             </div>
-
-            <button class="close-btn" onclick="toggleSettings(false)">[ BACK TO TERMINAL ]</button>
+            <div class="setting-row">
+                <label>BGM VOLUME</label>
+                <input type="range" id="volSlider" onchange="updateVol()">
+            </div>
+            <button class="btn-sm" onclick="toggleSettings(false)">RETURN</button>
         </div>
     </div>
+
+    <audio id="bgm" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 
     <script src="script.js"></script>
 </body>

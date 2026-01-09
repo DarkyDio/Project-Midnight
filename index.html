@@ -6,7 +6,9 @@
     <title>PROJECT: MIDNIGHT</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="layout-1" id="main-body"> <div class="tv-static"></div>
+<body class="layout-1" id="main-body">
+
+    <div class="tv-static"></div>
     <div class="vignette"></div>
 
     <div id="notification-gui" class="gui-popup">
@@ -16,32 +18,43 @@
     <main id="main-menu">
         <div class="branding">
             <h1 class="title">PROJECT: MIDNIGHT</h1>
-            <p class="subtitle">Storage Facility Management System v1.0</p>
+            <p class="subtitle" id="subtitle-text">Storage Facility Management System v1.0</p>
         </div>
 
         <nav class="nav-buttons">
-            <button class="btn" onclick="startGame()">NEW ENTRY</button>
-            <button class="btn" onclick="showMsg('NO SAVE DATA FOUND')">RESUME</button>
-            <button class="btn" onclick="toggleSettings(true)">SETTINGS</button>
+            <button class="btn" id="btn-new" onclick="startGame()">NEW ENTRY</button>
+            <button class="btn" id="btn-resume" onclick="showMsg('NO SAVE DATA')">RESUME</button>
+            <button class="btn" id="btn-settings" onclick="toggleSettings(true)">SETTINGS</button>
         </nav>
     </main>
 
     <div id="settings-menu" class="modal">
         <div class="modal-content">
-            <h3>TERMINAL CONFIG</h3>
+            <h2 class="settings-header" id="header-config">SYSTEM CONFIGURATION</h2>
+            
             <div class="setting-row">
-                <label>INTERFACE STYLE</label>
-                <select onchange="changeLayout(this.value)">
+                <label>LANGUAGE / IDIOMA</label>
+                <div class="btn-group">
+                    <button class="btn-sm" onclick="setLanguage('EN')">ENGLISH</button>
+                    <button class="btn-sm" onclick="setLanguage('ES')">ESPAÑOL</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <label id="label-layout">INTERFACE LAYOUT</label>
+                <select class="custom-select" onchange="changeLayout(this.value)">
                     <option value="layout-1">Classic Center</option>
                     <option value="layout-2">Left Terminal</option>
-                    <option value="layout-3">Minimalist Top</option>
+                    <option value="layout-3">Top Bar</option>
                 </select>
             </div>
+
             <div class="setting-row">
-                <label>BGM VOLUME</label>
-                <input type="range" id="volSlider" onchange="updateVol()">
+                <label id="label-audio">AUDIO MASTER</label>
+                <input type="range" min="0" max="100" value="50" oninput="updateVol(this.value)">
             </div>
-            <button class="btn-sm" onclick="toggleSettings(false)">RETURN</button>
+
+            <button class="btn-close" onclick="toggleSettings(false)" id="btn-back">BACK TO TERMINAL</button>
         </div>
     </div>
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT: MIDNIGHT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="vhs-overlay"></div>
+    <div class="scanlines"></div>
+
+    <div id="main-menu" class="menu-wrapper">
+        <header>
+            <p class="system-text">TERMINAL V.99.12 - USER: ALISTER THORNE</p>
+            <h1 class="main-title">PROJECT<br><span class="glitch">MIDNIGHT</span></h1>
+        </header>
+
+        <nav class="menu-options">
+            <button class="menu-btn" onclick="startGame()">[ NEW ENTRY ]</button>
+            <button class="menu-btn" onclick="continueGame()">[ RESUME ]</button>
+            <button class="menu-btn" onclick="toggleSettings(true)">[ SETTINGS ]</button>
+        </nav>
+
+        <footer class="menu-footer">
+            <p>FACILITY: STORAGE UNIT-06 | STATUS: Y2K READY</p>
+            <p class="copyright">© 1999 FAZBEAR ENT. SUBSIDIARY.</p>
+        </footer>
+    </div>
+
+    <div id="settings-menu" class="settings-overlay">
+        <div class="settings-content">
+            <h2 class="settings-title">SYSTEM CONFIGURATION</h2>
+            
+            <div class="setting-item">
+                <label>AUDIO VOLUME</label>
+                <input type="range" min="0" max="100" value="80">
+            </div>
+
+            <div class="setting-item">
+                <label>VISUAL STATIC</label>
+                <input type="checkbox" checked>
+            </div>
+
+            <div class="setting-item">
+                <label>FULLSCREEN</label>
+                <button class="small-btn">TOGGLE</button>
+            </div>
+
+            <div class="setting-item">
+                <label>DIFFICULTY</label>
+                <span class="status-green">NORMAL</span>
+            </div>
+
+            <button class="close-btn" onclick="toggleSettings(false)">[ BACK TO TERMINAL ]</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

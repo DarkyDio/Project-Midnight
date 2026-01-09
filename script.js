@@ -1,70 +1,45 @@
-// --- PROJECT: MIDNIGHT | TERMINAL LOGIC ---
+const bgm = document.getElementById('bgm');
+const clickSound = document.getElementById('click-sound');
 
-// Configuration state
-let config = {
-    volume: 80,
-    staticEffect: true,
-    difficulty: "NORMAL"
-};
-
-/**
- * Transition to the game or intro story
- */
-function startGame() {
-    console.log("ALISTER_THORNE_LOGGED_IN...");
-    
-    // Add a transition effect (Fade out)
-    document.body.style.transition = "opacity 1s";
-    document.body.style.opacity = "0";
-
-    setTimeout(() => {
-        // Here you would redirect to your office.html or change the DOM
-        alert("Initializing Intro: 1985 Employee Record of Alister Thorne...");
-        // For now, let's just reset for the demo
-        document.body.style.opacity = "1";
-    }, 1000);
-}
-
-/**
- * Resumes the last session from localStorage
- */
-function continueGame() {
-    const savedNight = localStorage.getItem('midnight_night');
-    if (savedNight) {
-        alert("Resuming Night " + savedNight + "...");
-    } else {
-        alert("ERROR: No save data found for SUBJECT: THORNE.");
+// Iniciar música al primer click (Regla de navegadores)
+document.addEventListener('click', () => {
+    if (bgm.paused) {
+        bgm.volume = 0.3;
+        bgm.play();
     }
+}, { once: true });
+
+function showMsg(text) {
+    const gui = document.getElementById('notification-gui');
+    document.getElementById('gui-msg').innerText = text;
+    gui.classList.add('active');
+    setTimeout(() => gui.classList.remove('active'), 2500);
 }
 
-/**
- * Toggles the Settings Overlay with animation
- */
+function changeLayout(layoutName) {
+    document.getElementById('main-body').className = layoutName;
+    showMsg("LAYOUT UPDATED: " + layoutName.toUpperCase());
+    playSoftClick();
+}
+
+function playSoftClick() {
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.2;
+    clickSound.play();
+}
+
 function toggleSettings(show) {
-    const settingsMenu = document.getElementById('settings-menu');
-    
-    if (show) {
-        settingsMenu.classList.add('active');
-        console.log("Terminal Config: Opened.");
-    } else {
-        settingsMenu.classList.remove('active');
-        console.log("Terminal Config: Closed. Settings Saved.");
-        saveConfig();
-    }
+    playSoftClick();
+    document.getElementById('settings-menu').style.display = show ? 'flex' : 'none';
 }
 
-/**
- * Simple local saving for settings
- */
-function saveConfig() {
-    localStorage.setItem('midnight_config', JSON.stringify(config));
+function startGame() {
+    playSoftClick();
+    showMsg("INITIALIZING SYSTEM...");
+    // Transición suave aquí
 }
 
-// Visual feedback for Terminal Buttons (Console style)
-const buttons = document.querySelectorAll('.menu-btn');
-buttons.forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-        // You could play a 'beep' sound here
-        console.log("Terminal_Hover: " + btn.innerText);
-    });
+// Vincula el sonido a todos los botones automáticamente
+document.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', playSoftClick);
 });
